@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./service_app:/code/service_app
+      - ./clients:/code/clients
+      - ./my_services:/code/my_services
+      - ./service:/code/service
+    command: python manage.py runserver 0.0.0.0:8000
