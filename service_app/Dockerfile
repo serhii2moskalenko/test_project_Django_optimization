@@ -4,12 +4,16 @@ FROM python:3.9-alpine3.16
 # Установка переменной окружения PYTHONUNBUFFERED для отключения буферизации вывода
 ENV PYTHONUNBUFFERED 1
 
+# Создание пользователя 'app' внутри контейнера
+RUN adduser -D app
+USER app
+
 # Установка рабочей директории внутри контейнера
 WORKDIR /code
 
 # Установка зависимостей проекта
 COPY requirements.txt /code/
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Копирование кода проекта в контейнер
 COPY . /code/
